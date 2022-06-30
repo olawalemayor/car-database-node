@@ -27,11 +27,10 @@ app.get("/filter", (req, res) => carController.getMakes(req, res)); // Get all m
 app.get("/filtmodel", (req, res) => carController.getModels(req, res)); //Filter models by makes
 app.get("/filtyear", (req, res) => carController.getYears(req, res)); // Filter years by make and models
 
-conn
-  .then(() => {
-    console.log("connected to database!");
-    app.listen(port, () => console.log(`app is listening on port ${port} !!!`));
-  })
-  .catch((err) => {
-    throw err;
-  });
+const main = async () => {
+  await conn; //wait for database connection
+
+  app.listen(port, () => console.log(`app is listening on port ${port} !`));
+};
+
+main();

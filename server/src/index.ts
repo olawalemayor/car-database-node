@@ -26,6 +26,9 @@ app.get("/s", (req, res) => carController.getCarBySearch(req, res)); // Search c
 app.get("/filter", (req, res) => carController.getMakes(req, res)); // Get all makes
 app.get("/filtmodel", (req, res) => carController.getModels(req, res)); //Filter models by makes
 app.get("/filtyear", (req, res) => carController.getYears(req, res)); // Filter years by make and models
+app.get("*", (req, res) => {
+  res.send("Invalid route. Error 404");
+});
 
 const main = async () => {
   await conn; //wait for database connection

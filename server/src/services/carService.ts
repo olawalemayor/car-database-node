@@ -24,8 +24,14 @@ class CarService {
     return await this.carRepo.getCar(id);
   }
 
-  async getCarBySearch(make: string, model: string, year: string) {
-    return await this.carRepo.getCarBySearch(make, model, year);
+  async getCarBySearch(
+    make: string,
+    model: string,
+    year: string,
+    page: number,
+    limit: number
+  ) {
+    return await this.carRepo.getCarBySearch(make, model, year, page, limit);
   }
 
   async getMakes() {

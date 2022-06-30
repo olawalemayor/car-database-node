@@ -41,10 +41,11 @@ class CarRepository {
 
   async getCars(page: number, limit: number) {
     try {
+      const maxLimit = limit || 5;
       return await this._cars
         .find()
-        .limit(limit)
-        .skip(limit * page);
+        .limit(maxLimit)
+        .skip((maxLimit - 1) * page);
     } catch (error) {
       throw error;
     }
@@ -103,15 +104,24 @@ class CarRepository {
     }
   }
 
-  async getCarBySearch(make: string, model: string, year: string) {
+  async getCarBySearch(
+    make: string,
+    model: string,
+    year: string,
+    page: number,
+    limit: number
+  ) {
     try {
       const yearRegEx = new RegExp(`.*${year}.*`);
 
-      const result = await this._cars.find({
-        model: make,
-        brand: model,
-        url: yearRegEx,
-      });
+      const result = await this._cars
+        .find({
+          model: make,
+          brand: model,
+          url: yearRegEx,
+        })
+        .limit(limit)
+        .skip((limit - 1) * page);
 
       return result;
     } catch (error) {

@@ -10,17 +10,14 @@ npm install
 
 ## Configuaration variables
 
-The config npm module was used for configuration,
-The default or production JSON file would look like this
+The dotenv npm module was used for configuration,
+The .env or .env.production file would look like this
 
-```json
-{
-  "dbName": "cardb",        //Database name
-  "dbHost": "localhost",    //Databse host
-  "dbPort": 27017,          //Database port
-  "dbUser": "",             //Database username
-  "dbPass": ""              //Database password
-}
+```.env
+DB_PASSWORD=password
+DB_USER=user
+DB_HOST=mongodb://localhost
+DB_NAME=cardb
 
 ```
 
@@ -33,6 +30,8 @@ uses the GET method.
 ```bash
 /api/
 ```
+
+Always use queries, there are a lot of cars so you can run out of memory
 
 ### Get cars using ID
 

@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
-import conn from "../db";
+import "dotenv/config";
+
+import conn from "./db";
 import { CarController } from "./controllers";
 import { CarRepository } from "./repositories/";
 import { CarService } from "./services";

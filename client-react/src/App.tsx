@@ -11,10 +11,11 @@ function App() {
     result: [],
     next: [],
   });
+  const [filteredYear, setFilteredYear] = useState<string>("");
 
   return (
     <div className="App">
-      <FilterContext.Provider value={[filterCars, setFilterCars]}>
+      <FilterContext.Provider value={[filterCars, setFilterCars, filteredYear]}>
         <header className="mb-10 fixed top-0 w-full bg-white z-50 shadow-lg">
           <Header setFilterCars={setFilterCars} />
         </header>
@@ -22,7 +23,10 @@ function App() {
         <div className="flex flex-col lg:flex-row mt-32 ">
           <div className="w-full lg:w-[30%] mt-5">
             <div className="lg:fixed lg:w-[30%] lg:h-full">
-              <Filter setFilterCars={setFilterCars} />
+              <Filter
+                setFilterCars={setFilterCars}
+                setFilteredYear={setFilteredYear}
+              />
             </div>
           </div>
 

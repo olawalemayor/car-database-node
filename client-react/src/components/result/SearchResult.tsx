@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import placeholderImage from "../../assets/images/pexels-khalid-satvilker-10590576.jpg";
 
 export default function SearchResult() {
-  const [filterCars] = useContext(filterContext);
+  const [filterCars, , year] = useContext(filterContext);
 
   const navigate = useNavigate();
 
@@ -33,24 +33,42 @@ export default function SearchResult() {
           filterCars.result.map(
             ({ brand, model, images_links, description, _id }, index) => (
               <div
-                className="flex flex-col lg:flex-row p-2 bg-slate-100 hover:bg-slate-300 cursor-pointer border border-blue-500 rounded-md mb-2"
+                className="flex flex-col lg:flex-row p-2 rounded-md mb-2 shadow-2xl"
                 key={index}
-                onClick={() => navigate(`car/${_id}`)}
               >
                 <div className="w-full lg:w-[40%] xl:w-[30%] mt-2 px-2">
-                  <div className="w-full lg:w-[200px] h-[250px] lg:h-[200px] bg-black">
+                  <div className="bg-black">
                     <img
                       src={images_links[0]}
                       alt={`${model} ${brand}`}
-                      className="w-full h-full"
+                      className="w-full h-auto"
                     />
                   </div>
                 </div>
 
                 <div className="w-full lg:w-[60%] xl:w-[70%]">
-                  <div className="h-48 overflow-hidden text-black">
-                    {description}
-                  </div>
+                  <h4 className="font-bold text-2xl">
+                    {model} {brand} {year}
+                  </h4>
+
+                  {!description && (
+                    <div className="text-gray-600 mb-2 lg:h-24">
+                      No description available for this vehicle
+                    </div>
+                  )}
+
+                  {description && (
+                    <div className="h-24 overflow-hidden text-gray-600 mb-2">
+                      {description}
+                    </div>
+                  )}
+
+                  <button
+                    className="px-4 py-2 bg-blue-700 hover:bg-blue-500 text-white block mx-auto lg:mx-0"
+                    onClick={() => navigate(`car/${_id}`)}
+                  >
+                    SEE MORE
+                  </button>
                 </div>
               </div>
             )

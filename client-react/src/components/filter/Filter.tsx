@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 interface filterProp {
   setFilterCars: React.Dispatch<React.SetStateAction<ResponseResult>>;
+  setFilteredYear: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Filter({ setFilterCars }: filterProp) {
+export default function Filter({ setFilterCars, setFilteredYear }: filterProp) {
   const [makes, setMakes] = useState<string[]>([]);
   const [selectedMake, setSelectedMake] = useState<string>("");
   const [models, setModels] = useState<string[]>([]);
@@ -86,6 +87,7 @@ export default function Filter({ setFilterCars }: filterProp) {
     };
 
     setCar(make, model, year);
+    setFilteredYear(year);
 
     navigate("");
   };
@@ -112,7 +114,7 @@ export default function Filter({ setFilterCars }: filterProp) {
         <Select data={years} id="year" name="year" placeholder="Select Year" />
 
         <button
-          className="block mx-auto px-5 py-2 bg-blue-700 text-white"
+          className="block mx-auto px-5 py-2 bg-blue-700 hover:bg-blue-500 text-white"
           type="submit"
         >
           Search

@@ -30,7 +30,7 @@ export default function Details() {
             {car.model} {car.brand}
           </h3>
 
-          <div className="bg-black w-full h-[300px] lg:h-[500px] overflow-hidden relative">
+          <div className="bg-black w-full h-auto overflow-hidden relative">
             <Slider images={car.images_links} />
           </div>
 
@@ -38,9 +38,16 @@ export default function Details() {
             <h4 className="uppercase text-lg font-bold text-blue-700">
               Details
             </h4>
-            <div className="h-52 overflow-scroll">
-              <p className="text-justify">{car.description}</p>
-            </div>
+
+            {!car.description && (
+              <p>No description available for this vehicle</p>
+            )}
+
+            {car.description && (
+              <p className="text-justify h-52 overflow-y-scroll border p-2 bg-slate-700 text-white text-xl font-thin tracking-wider leading-9">
+                {car.description}
+              </p>
+            )}
           </div>
 
           <div className="mt-4">
